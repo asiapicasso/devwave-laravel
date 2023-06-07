@@ -1,0 +1,13 @@
+.song-card {
+    display: flex;
+    align-items: center;
+    margin: 3%;
+}
+
+.vote-buttons {
+    margin-right: 1rem;
+}
+
+.vote-buttons button {
+    margin-bottom: 0.5rem;
+}

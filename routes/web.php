@@ -41,7 +41,12 @@ Route::get('/chat', function () {
     return view('poll');
 })->middleware('auth')->name('poll');
  */
+
 Route::get('/reddit', [SongController::class, 'index'])->middleware('auth')->name('reddit');
+Route::post('/vote', 'VoteController@vote')->name('vote');
+
+Route::get('/search', 'ChosenSongController@searchForm')->name('search.form');
+Route::post('/search', 'ChosenSongController@search')->name('search');
 
 
 Route::get('/{profile}', [ProfileController::class, 'showProfile'])->middleware('auth')->name('profile');
@@ -52,11 +57,6 @@ Route::get('/update/{username}', [ProfileController::class, 'showProfile'])->mid
 Route::get('/update/{firstname}', [ProfileController::class, 'showProfile'])->middleware('auth')->name('update_firstname');
 Route::get('/update/{lastname}', [ProfileController::class, 'showProfile'])->middleware('auth')->name('update_lastname');
 Route::get('/poll', [PollController::class, 'index'])->name('poll.index');
-
-
-
-
-
 
 Route::post('/profile/update-email', [ProfileController::class, 'updateEmail'])->name('profile.updateEmail');
 Route::post('/profile/update-firstname', [ProfileController::class, 'updateFirstname'])->name('profile.updateFirstname');

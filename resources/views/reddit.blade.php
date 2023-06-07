@@ -14,25 +14,19 @@
                         {{ session('status') }}
                     </div>
                     @endif
-                    @if($currentUser->isReader())
-                
-                    <form method="POST" action="{{ route('song.store') }}">
-                        @csrf
+                    @if($currentUser->isReader()) --}}
 
-
-                        <div>
-                            <label for="question">Nom :</label>
-                            <input type="text" name="title" id="title" required>
-                        </div>
-
-                        <button type="submit">Add song</button>
-                    </form>
-                    @endif --}}
-                    <div class="card-body">
+                    <div class="card-body"> 
                         @foreach ($song as $song)
-                            <div class="card" style="margin: 3%;">{{ $song->title }} - {{ $song->album->artist->first()->name }}</div>
+                    <div class="card" style="margin: 3%;"> {{ $song->nb_vote }} : {{ $song->title }} - {{ $song->album->artist->first()->name }}</div> 
+
+                    <button type="submit" name="vote" value="up">+1</button>
+        <button type="submit" name="vote" value="down">-1</button>
+    
                         @endforeach
-                    </div>
+                    </div> 
+
+                    
                 </div>
             </div>
         </div>
