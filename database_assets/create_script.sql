@@ -268,7 +268,7 @@ COLLATE = utf8mb4_unicode_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `devwave`.`random_sentence` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `sentence` VARCHAR(45) NOT NULL,
+  `sentence` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
