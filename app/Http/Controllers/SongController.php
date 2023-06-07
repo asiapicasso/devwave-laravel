@@ -18,10 +18,10 @@ class SongController extends Controller
 
         $currentUser = Auth::user();
 
-        $song = Song::with('album')->get();
+        $songs = Song::with('album')->get();
 
 
-        return view('reddit', ['song' => $song, 'currentUser' => $currentUser]);
+        return view('reddit', ['songs' => $songs, 'currentUser' => $currentUser]);
 
     }
 

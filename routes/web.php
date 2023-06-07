@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ChosenSongController;
+use App\Models\ChosenSong;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Http\Request;
@@ -42,7 +44,10 @@ Route::get('/chat', function () {
 })->middleware('auth')->name('poll');
  */
 
-Route::get('/reddit', [SongController::class, 'index'])->middleware('auth')->name('reddit');
+/* Route::get('/reddit', [SongController::class, 'index'])->middleware('auth')->name('reddit');
+ */
+Route::get('/reddit', [ChosenSongController::class, 'index'])->middleware('auth')->name('reddit');
+
 Route::post('/vote', 'VoteController@vote')->name('vote');
 
 Route::get('/search', 'ChosenSongController@searchForm')->name('search.form');
@@ -63,3 +68,5 @@ Route::post('/profile/update-firstname', [ProfileController::class, 'updateFirst
 Route::post('/profile/update-username', [ProfileController::class, 'updateUsername'])->name('profile.updateUsername');
 Route::post('/profile/update-phonenumber', [ProfileController::class, 'updatePhonenumber'])->name('profile.updatePhonenumber');
 Route::post('/profile/update-lastname', [ProfileController::class, 'updateLastname'])->name('profile.updateLastname');
+
+Route::post('/chosen/vote', [ChosenSongController::class, 'vote'])->name('chosen.vote');

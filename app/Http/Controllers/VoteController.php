@@ -12,9 +12,11 @@ class VoteController extends Controller
         $chosenSong = ChosenSong::where('song_id', $id)->first();
 
         if ($chosenSong) {
-            $nbVote = $chosenSong->nb_vote;
-            return response()->json(['nb_vote' => $nbVote]);
-        } else {
+
+            return view('reddit', ['chosenSong' => $chosenSong]);
+
+            /*             return response()->json(['nb_vote' => $nbVote]);
+             */} else {
             return response()->json(['error' => 'Chosen song not found.']);
         }
     }
