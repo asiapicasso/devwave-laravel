@@ -17,6 +17,11 @@ class User extends Authenticatable
         return $this->access_type === 'admin'; // Remplacez 'type' par le champ correspondant dans votre table "users"
     }
 
+    public function isReader()
+    {
+        return $this->access_type === 'reader'; // Remplacez 'type' par le champ correspondant dans votre table "users"
+    }
+
     /**
      * The attributes that are mass assignable.
      *
@@ -52,7 +57,7 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-     /**
+    /**
      * Update the user's name in the database.
      *
      * @param  string  $name

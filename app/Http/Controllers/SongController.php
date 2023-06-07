@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Poll;
+use App\Models\Song;
 use Illuminate\Support\Facades\Auth;
 
-class PollController extends Controller
+class SongController extends Controller
 {
 
 
@@ -15,13 +15,16 @@ class PollController extends Controller
      */
     public function index()
     {
+
         $currentUser = Auth::user();
-        $polls = Poll::with('answers')->get();
-        // dd($polls);
+
+        $song = Song::with('album')->get();
 
 
-        return view('poll', ['polls' => $polls, 'currentUser' => $currentUser]);
+        return view('reddit', ['song' => $song, 'currentUser' => $currentUser]);
+
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -37,14 +40,12 @@ class PollController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'date' => 'required',
-            'theme' => 'required',
-            'question' => 'required',
+            'title' => 'required',
         ]);
 
-        Poll::create($validatedData);
+        Song::create($validatedData);
 
-        return redirect()->route('poll.index')->with('success', 'Sondage créé avec succès');
+        return redirect()->back()->with('success', 'Chanson ajouté avec succès');
     }
 
     /**
@@ -78,4 +79,15 @@ class PollController extends Controller
     {
         //
     }
+
+    /* public function getSong(Request $request)
+    {
+        $songTitle = $request->input('title');
+        $song = Song::where('title', $songTitle)->first();
+        if ($song) {
+            return view('song.show', ['song' => $song]);
+        } else {
+            return redirect('song')->with('error', 'Song Not Found');
+        }
+    } */
 }

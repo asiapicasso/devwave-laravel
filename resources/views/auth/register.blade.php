@@ -156,7 +156,6 @@
                                 </button>
                             </div>
                         </div>
-                        <!-- ... Autres éléments du formulaire ... -->
 
 
 

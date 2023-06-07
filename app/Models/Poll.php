@@ -23,4 +23,9 @@ class Poll extends Model
         'theme',
         'question',
     ];
+
+    public function answers()
+    {
+        return $this->hasMany(Answer::class);
+    }
 }

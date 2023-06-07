@@ -45,9 +45,13 @@
                     <p>Aucun sondage trouvé.</p>
                     @else
                     <ul>
-                        @foreach($polls as $poll)
-                        <li>{{ $poll->theme }} - {{ $poll->question }}</li>
-                        @endforeach
+                        @foreach ($polls as $poll)
+        <h2>{{ $poll->question }}</h2>
+        @foreach ($poll->answers as $answer)
+            <p>{{ $answer->title }}: {{ $answer->nb_vote }} votes</p>
+        @endforeach
+    @endforeach
+                        
                     </ul>
                     @endif
 

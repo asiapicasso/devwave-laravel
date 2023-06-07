@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\PollController;
+use App\Http\Controllers\SongController;
 
 
 
@@ -19,14 +20,13 @@ use App\Http\Controllers\PollController;
 */
 Route::resource('poll', PollController::class);
 
-
-
+Route::resource('song', SongController::class);
 
 Route::get('/', function () {
     return view('auth.login');
 });
 
-Auth::routes();
+Auth::routes(); // default route pour login et reigster
 Auth::routes(['register' => false]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -41,10 +41,7 @@ Route::get('/chat', function () {
     return view('poll');
 })->middleware('auth')->name('poll');
  */
-Route::get('/reddit', function () {
-    return view('reddit');
-})->middleware('auth')->name('reddit');
-
+Route::get('/reddit', [SongController::class, 'index'])->middleware('auth')->name('reddit');
 
 
 Route::get('/{profile}', [ProfileController::class, 'showProfile'])->middleware('auth')->name('profile');
@@ -66,4 +63,3 @@ Route::post('/profile/update-firstname', [ProfileController::class, 'updateFirst
 Route::post('/profile/update-username', [ProfileController::class, 'updateUsername'])->name('profile.updateUsername');
 Route::post('/profile/update-phonenumber', [ProfileController::class, 'updatePhonenumber'])->name('profile.updatePhonenumber');
 Route::post('/profile/update-lastname', [ProfileController::class, 'updateLastname'])->name('profile.updateLastname');
-
