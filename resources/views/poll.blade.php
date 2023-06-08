@@ -46,13 +46,17 @@
                     @else
                     <ul>
                         @foreach ($polls as $poll)
-        <h2>{{ $poll->question }}</h2>
-        @foreach ($poll->answers as $answer)
-            <p>{{ $answer->title }}: {{ $answer->nb_vote }} votes</p>
-        @endforeach
-    @endforeach
-                        
+                        <h2>{{ $poll->question }}</h2>
+                        @foreach ($poll->answers as $answer)
+                        <label>
+                            <input type="radio" name="poll_{{ $poll->id }}" value="{{ $answer->id }}">
+                            {{ $answer->title }}: {{ $answer->nb_vote }} votes
+                        </label> <br />
+
+                        @endforeach
+                        @endforeach
                     </ul>
+
                     @endif
 
 

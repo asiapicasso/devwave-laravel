@@ -18,10 +18,12 @@ class ChosenSongController extends Controller
 
         $currentUser = Auth::user();
 
-        $chosenSongs = ChosenSong::with('song')->get();
+        $chosenSongs = ChosenSong::with('song')->orderBy('nb_vote', 'desc')->get();
 
+        $songController = new SongController();
+        $songs = $songController->getAllSongs();
 
-        return view('reddit', ['chosenSongs' => $chosenSongs, 'currentUser' => $currentUser]);
+        return view('reddit', ['chosenSongs' => $chosenSongs, 'currentUser' => $currentUser, 'songs' => $songs]);
 
     }
 

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ChosenSongController;
+use App\Models\Answer;
 use App\Models\ChosenSong;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
@@ -48,6 +49,7 @@ Route::get('/chat', function () {
  */
 Route::get('/reddit', [ChosenSongController::class, 'index'])->middleware('auth')->name('reddit');
 
+
 Route::post('/vote', 'VoteController@vote')->name('vote');
 
 Route::get('/search', 'ChosenSongController@searchForm')->name('search.form');
@@ -70,3 +72,6 @@ Route::post('/profile/update-phonenumber', [ProfileController::class, 'updatePho
 Route::post('/profile/update-lastname', [ProfileController::class, 'updateLastname'])->name('profile.updateLastname');
 
 Route::post('/chosen/vote', [ChosenSongController::class, 'vote'])->name('chosen.vote');
+Route::post('/song/choose', [SongController::class, 'addToChosenSong'])->name('song.choose');
+
+Route::post('/answer/vote', [AnswerCon::class, 'vote'])->name('answer.vote');

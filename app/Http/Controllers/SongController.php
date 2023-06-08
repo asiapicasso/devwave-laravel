@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ChosenSong;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Song;
 use Illuminate\Support\Facades\Auth;
@@ -22,6 +24,15 @@ class SongController extends Controller
 
 
         return view('reddit', ['songs' => $songs, 'currentUser' => $currentUser]);
+
+    }
+
+
+    public function getAllSongs()
+    {
+        $songs = Song::with('album')->get();
+
+        return $songs;
 
     }
 
@@ -47,6 +58,31 @@ class SongController extends Controller
 
         return redirect()->back()->with('success', 'Chanson ajouté avec succès');
     }
+
+
+    public function addToChosenSong(Request $request)
+    {
+        $songId = $request->input('input_song_id');
+        $userId = Auth::id();
+
+        // Vérifier si le song_id n'est pas déjà présent dans la table ChosenSong pour cet utilisateur
+        $existingChosenSong = ChosenSong::where('song_id', $songId)->first();
+
+        if ($existingChosenSong) {
+            return redirect()->back()->with('error', 'La chanson est déjà présente dans la liste des chansons choisies.');
+        }
+
+        // Si le song_id n'est pas déjà présent, ajoutez-le à la table ChosenSong
+        $chosenSong = new ChosenSong();
+        $chosenSong->song_id = $songId;
+        $chosenSong->user_id = $userId;
+        $chosenSong->date = Carbon::now();
+        $chosenSong->nb_vote = 1;
+        $chosenSong->save();
+
+        return redirect()->back()->with('success', 'Chanson ajoutée avec succès.');
+    }
+
 
     /**
      * Display the specified resource.
