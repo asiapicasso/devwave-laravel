@@ -24,5 +24,6 @@ class AnwserController extends Controller
         $uid = Auth::id();
 
 
+
     }
 }

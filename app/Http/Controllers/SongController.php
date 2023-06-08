@@ -22,7 +22,6 @@ class SongController extends Controller
 
         $songs = Song::with('album')->get();
 
-
         return view('reddit', ['songs' => $songs, 'currentUser' => $currentUser]);
 
     }
@@ -30,7 +29,8 @@ class SongController extends Controller
 
     public function getAllSongs()
     {
-        $songs = Song::with('album')->get();
+        // ici on ajoute la table devant title pour spécifier que c'est bien le champs title de song que l'on veut trier et non celui de la relation contenu dans la table album-> title
+        $songs = Song::with('album')->orderBy('song.title', 'asc')->get();
 
         return $songs;
 

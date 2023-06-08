@@ -47,15 +47,44 @@
                     <ul>
                         @foreach ($polls as $poll)
                         <h2>{{ $poll->question }}</h2>
-                        @foreach ($poll->answers as $answer)
-                        <label>
-                            <input type="radio" name="poll_{{ $poll->id }}" value="{{ $answer->id }}">
-                            {{ $answer->title }}: {{ $answer->nb_vote }} votes
-                        </label> <br />
+                        <form method="POST" action="{{ route('poll.vote') }}" class="vote-form">
+                            @csrf
+                            @if (optional($currentUser->polls)->contains('id', $poll->id))
+                            @foreach ($poll->answers as $answer)
+                            <label>
+                                <input type="radio" name="answer_id" value="{{ $answer->id }}"
+                                    onchange="this.form.submit()">
+                                {{ $answer->title }}: {{ $answer->nb_vote }} votes
+                            </label> <br />
+                            @endforeach
+                            @else
+                            {{-- <h2>{{ $poll->question }}</h2>
+                            --}}
+                            @foreach ($poll->answers as $answer)
+                            <li>
+                                <label>
+                                    <p type="text" name="answer_id" value="{{ $answer->id }}"
+                                        onchange="this.form.submit()">
+                                        {{ $answer->title }}: {{ $answer->nb_vote }} votes
+                                </label>
+                            </li> <br />
+                            @endforeach
+                            <p>Vous avez déjà voté pour ce sondage</p> <br />
+                            @endif
 
+                            <button type="submit" style="display: none;">Voter</button>
+                        </form>
                         @endforeach
-                        @endforeach
+
                     </ul>
+
+                    <script>
+                        function submitVote(radio) {
+                            radio.closest('.vote-form').submit();
+                        }
+                    </script>
+
+
 
                     @endif
 

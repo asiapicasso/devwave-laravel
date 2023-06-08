@@ -50,7 +50,8 @@ Route::get('/chat', function () {
 Route::get('/reddit', [ChosenSongController::class, 'index'])->middleware('auth')->name('reddit');
 
 
-Route::post('/vote', 'VoteController@vote')->name('vote');
+/* Route::post('/vote', 'VoteController@vote')->name('vote');*/
+Route::post('/vote', [PollController::class, 'vote'])->name('poll.vote');
 
 Route::get('/search', 'ChosenSongController@searchForm')->name('search.form');
 Route::post('/search', 'ChosenSongController@search')->name('search');
@@ -74,4 +75,4 @@ Route::post('/profile/update-lastname', [ProfileController::class, 'updateLastna
 Route::post('/chosen/vote', [ChosenSongController::class, 'vote'])->name('chosen.vote');
 Route::post('/song/choose', [SongController::class, 'addToChosenSong'])->name('song.choose');
 
-Route::post('/answer/vote', [AnswerCon::class, 'vote'])->name('answer.vote');
+Route::post('/answer/vote', [AnswerController::class, 'vote'])->name('answer.vote');

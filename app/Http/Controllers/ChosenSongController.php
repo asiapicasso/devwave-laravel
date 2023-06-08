@@ -23,6 +23,12 @@ class ChosenSongController extends Controller
         $songController = new SongController();
         $songs = $songController->getAllSongs();
 
+        // Extraire les IDs des chansons choisies
+        $chosenSongIds = $chosenSongs->pluck('song.id')->toArray();
+
+        // Supprimer les chansons choisies de la liste des chansons
+        $songs = $songs->except($chosenSongIds);
+
         return view('reddit', ['chosenSongs' => $chosenSongs, 'currentUser' => $currentUser, 'songs' => $songs]);
 
     }

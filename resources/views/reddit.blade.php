@@ -50,6 +50,11 @@
                             var hiddenInput = document.getElementById('input_song_id');
                             var currentValue = '';
 
+                            // assigne le premier élément de la liste déroulante
+                            var selectedOption = selectElement.options[selectElement.selectedIndex];
+                            currentValue = selectedOption.value;
+                            hiddenInput.value = currentValue;
+
                             if (selectElement) {
                                 selectElement.addEventListener('change', function () {
                                     var selectedOption = selectElement.options[selectElement.selectedIndex];
@@ -66,9 +71,10 @@
                 <div class="card-body">
                     @foreach ($chosenSongs as $chosenSong)
                     <div class="card" style="margin: 3%;">
-                        {{ $chosenSong->nb_vote }}
-                        {{ $chosenSong->song->title }} - {{ $chosenSong->song->album->artist->first()->name}}
 
+                        {{ $chosenSong->song->title }} - {{ $chosenSong->song->album->artist->first()->name}}
+                        <br />
+                        Nombre de votes : {{ $chosenSong->nb_vote }}
                     </div>
                     <form action="{{ route('chosen.vote') }}" method="POST">
                         @csrf
