@@ -100,4 +100,3 @@ class ProfileController extends Controller
         return view('update_lastname', compact('currentUser'));
     }
 }
-
