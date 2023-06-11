@@ -14,10 +14,15 @@
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
+
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    <script src="{{ mix('resources/js/app.js') }}" defer></script>
+    <link href="{{ mix('resources/sass/app.scss') }}" rel="stylesheet">
+
 </head>
 @stack('scripts')
+
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
@@ -102,6 +107,8 @@
             @yield('content')
         </main>
     </div>
+
 </body>
+
 
 </html>

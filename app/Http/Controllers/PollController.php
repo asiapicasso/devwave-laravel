@@ -50,7 +50,7 @@ class PollController extends Controller
 
     public function vote(Request $request)
     {
-        /*dd($request->all());*/
+ 
 
 
         $answerId = $request->input('answer_id');
@@ -58,13 +58,16 @@ class PollController extends Controller
 
         // Vérifier si l'utilisateur a déjà voté pour le sondage
         $user = Auth::user();
+        dd($user->polls());
         if ($user->polls()->where('poll_id', $answer->poll_id)->exists()) {
             // L'utilisateur a déjà voté pour ce sondage
-            return redirect()->route('poll.show')->with('error', 'Vous avez déjà voté pour ce sondage');
+
+            return redirect()->back()->with('error', 'Vous avez déjà voté pour ce sondage');
+
+            /* return redirect()->route('poll.show'); */
         }
 
         // Incrémenter le nombre de votes pour la réponse sélectionnée
-        $answer->timestamps = false;
         $answer->increment('nb_vote');
 
         // Associer l'utilisateur au sondage

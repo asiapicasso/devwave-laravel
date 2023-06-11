@@ -33,6 +33,19 @@ class ProfileController extends Controller
         return redirect()->back()->with('status', 'Nom mis à jour avec succès');
     }
 
+
+
+    public function updatePicturePath(Request $request)
+    {
+        
+        $user = Auth::user();
+        $user->picture_path = $request->input('picture_path'); // fait référence à l'attribut name du input dans le form html
+        $user->save();
+
+        return redirect()->back()->with('status', 'Photo de profile modifiée avec succès');
+    }
+
+    
     public function updateFirstname(Request $request)
     {
         $user = Auth::user();
@@ -69,8 +82,7 @@ class ProfileController extends Controller
     }
 
 
-    public function showProfile($element)
-    {
+    public function showProfile($element)    {
         $currentUser = Auth::user();
         
         if($element == 'firstname'){
@@ -88,10 +100,12 @@ class ProfileController extends Controller
         } else if ($element == 'username') {
             return view('profile_details.update_username', compact('currentUser'));
 
+        } else if ($element == 'picture_path') {
+            return view('profile_details.update_picture_path', compact('currentUser'));
+        
+        } else {
+            return view('profile', compact('currentUser'));
         }
-
-       
-        return view('profile', compact('currentUser'));
     }
 
     public function showUpdateLastname()

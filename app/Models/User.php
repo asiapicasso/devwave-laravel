@@ -7,11 +7,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Model;
 
 class User extends Authenticatable
 {
 
     use HasApiTokens, HasFactory, Notifiable;
+    protected $table = 'users';
     public $timestamps = false;
     public function isAdmin()
     {
@@ -97,12 +99,12 @@ class User extends Authenticatable
     /**
      * Update the user's picture path in the database.
      *
-     * @param  string  $picturePath
+     * @param  string  $picture_path
      * @return bool
      */
-    public function updatePicturePath($picturePath)
+    public function updatePicturePath($picture_path)
     {
-        $this->picture_path = $picturePath;
+        $this->picture_path = $picture_path;
         return $this->save();
     }
 
@@ -117,13 +119,9 @@ class User extends Authenticatable
         $this->access_type = $accessType;
         return $this->save();
     }
-    /* public function polls()
+    public function polls()
     {
 
-        return $this->belongsToMany(Poll::class, 'user_has_poll')
-            ->using(UserHasPoll::class)
-            ->withPivot('user_status')
-            ->withPivot(['created_at', 'updated_at']) // Ignorer les timestamps
-            ->withTimestamps();
-    } */
+        return $this->belongsToMany(Poll::class, 'user_poll')
+            ->using(UserPoll::class);    }
 }

@@ -40,6 +40,36 @@
 
                     <!-- Fichier index.blade.php -->
                     <h1>Liste des sondages</h1>
+                    {{-- a faire dans le controlleur :@if($poll->isClosed()) --}}
+                    {{-- titre de la question --}}
+                    {{-- @if($polls->isEmpty())
+                    <p>Aucun sondage trouvé.</p>
+                    @else
+                    <ul>
+                        @foreach ($polls as $poll)
+                        <h2>{{ $poll->question }}</h2>
+                        @if (optional($currentUser->polls)->contains('id', $poll->id))
+                        <p>Vous avez déjà voté pour ce sondage</p> <br />
+
+                        @else
+                        <form method="POST" action="{{ route('poll.vote') }}" class="vote-form">
+                            @csrf
+                            @foreach ($poll->answers as $answer)
+                            <label>
+                                <p type="radio" name="answer_id" value="{{ $answer->id }}"
+                                    onchange="this.form.submit()">
+                                    {{ $answer->title }}: {{ $answer->nb_vote }} votes
+                            </label> <br />
+                        </form>
+                        <button type="submit" style="display: none;">Voter</button>
+                        @endforeach
+
+                        @endif
+                        @endforeach
+                    </ul>
+                    @endif --}}
+
+
 
                     @if($polls->isEmpty())
                     <p>Aucun sondage trouvé.</p>
@@ -49,7 +79,6 @@
                         <h2>{{ $poll->question }}</h2>
                         <form method="POST" action="{{ route('poll.vote') }}" class="vote-form">
                             @csrf
-                            @if (optional($currentUser->polls)->contains('id', $poll->id))
                             @foreach ($poll->answers as $answer)
                             <label>
                                 <input type="radio" name="answer_id" value="{{ $answer->id }}"
@@ -57,10 +86,10 @@
                                 {{ $answer->title }}: {{ $answer->nb_vote }} votes
                             </label> <br />
                             @endforeach
-                            @else
+
                             {{-- <h2>{{ $poll->question }}</h2>
                             --}}
-                            @foreach ($poll->answers as $answer)
+                            {{-- @foreach ($poll->answers as $answer)
                             <li>
                                 <label>
                                     <p type="text" name="answer_id" value="{{ $answer->id }}"
@@ -68,26 +97,21 @@
                                         {{ $answer->title }}: {{ $answer->nb_vote }} votes
                                 </label>
                             </li> <br />
-                            @endforeach
-                            <p>Vous avez déjà voté pour ce sondage</p> <br />
-                            @endif
+                            @endforeach --}}
+
 
                             <button type="submit" style="display: none;">Voter</button>
                         </form>
                         @endforeach
 
                     </ul>
+                    @endif
 
                     <script>
                         function submitVote(radio) {
                             radio.closest('.vote-form').submit();
                         }
                     </script>
-
-
-
-                    @endif
-
 
 
                 </div>

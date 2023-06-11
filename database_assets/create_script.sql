@@ -274,19 +274,19 @@ DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
--- Table `devwave`.`user_has_poll`
+-- Table `devwave`.`user_poll`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `devwave`.`user_has_poll` (
+CREATE TABLE IF NOT EXISTS `devwave`.`user_poll` (
   `user_id` INT NOT NULL,
   `poll_id` INT NOT NULL,
   `user_status` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`user_id`, `poll_id`),
-  INDEX `fk_user_has_poll_poll1_idx` (`poll_id` ASC) VISIBLE,
-  INDEX `fk_user_has_poll_user1_idx` (`user_id` ASC) VISIBLE,
-  CONSTRAINT `fk_user_has_poll_poll1`
+  INDEX `fk_user_poll_poll1_idx` (`poll_id` ASC) VISIBLE,
+  INDEX `fk_user_poll_user1_idx` (`user_id` ASC) VISIBLE,
+  CONSTRAINT `fk_user_poll_poll1`
     FOREIGN KEY (`poll_id`)
     REFERENCES `devwave`.`poll` (`id`),
-  CONSTRAINT `fk_user_has_poll_user1`
+  CONSTRAINT `fk_user_poll_user1`
     FOREIGN KEY (`user_id`)
     REFERENCES `devwave`.`users` (`id`))
 ENGINE = InnoDB

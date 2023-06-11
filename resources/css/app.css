@@ -11,3 +11,23 @@
 .vote-buttons button {
     margin-bottom: 0.5rem;
 }
+
+.photo-selection {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.photo-item {
+    width: 20%;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.photo-item img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+}

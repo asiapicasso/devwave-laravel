@@ -59,7 +59,7 @@ Route::post('/search', 'ChosenSongController@search')->name('search');
 Route::get('/{profile}', [ProfileController::class, 'showProfile'])->middleware('auth')->name('profile');
 Route::get('/update/{email}', [ProfileController::class, 'showProfile'])->middleware('auth')->name('update_email');
 Route::get('/update/{phonenumber}', [ProfileController::class, 'showProfile'])->middleware('auth')->name('update_phonenumber');
-Route::get('/update/{profile_picture}', [ProfileController::class, 'showProfile'])->middleware('auth')->name('update_profile_picture');
+Route::get('/update/{picture_path}', [ProfileController::class, 'showProfile'])->middleware('auth')->name('update_picture_path');
 Route::get('/update/{username}', [ProfileController::class, 'showProfile'])->middleware('auth')->name('update_username');
 Route::get('/update/{firstname}', [ProfileController::class, 'showProfile'])->middleware('auth')->name('update_firstname');
 Route::get('/update/{lastname}', [ProfileController::class, 'showProfile'])->middleware('auth')->name('update_lastname');
@@ -70,6 +70,8 @@ Route::post('/profile/update-firstname', [ProfileController::class, 'updateFirst
 Route::post('/profile/update-username', [ProfileController::class, 'updateUsername'])->name('profile.updateUsername');
 Route::post('/profile/update-phonenumber', [ProfileController::class, 'updatePhonenumber'])->name('profile.updatePhonenumber');
 Route::post('/profile/update-lastname', [ProfileController::class, 'updateLastname'])->name('profile.updateLastname');
+Route::post('/profile/update-picture_path', [ProfileController::class, 'updatePicturePath'])->name('profile.updatePicturePath');
+
 
 Route::post('/chosen/vote', [ChosenSongController::class, 'vote'])->name('chosen.vote');
 Route::post('/song/choose', [SongController::class, 'addToChosenSong'])->name('song.choose');

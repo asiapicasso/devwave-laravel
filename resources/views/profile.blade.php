@@ -14,6 +14,15 @@
                     </div>
                     @endif
                     <h1>Profil</h1>
+                    <p>Photo de profil :
+                        <img src="{{ asset( $currentUser->picture_path )  }}" alt="Prout">
+
+                        <a href="{{ route('update_picture_path', ['picture_path' => 'picture_path']) }}">
+                            <i class="fas fa-edit"></i> Edit
+                        </a>
+
+
+                    </p>
                     <p>Nom : {{ $currentUser->lastname }}
                         <a href="{{ route('update_lastname', ['lastname' => 'lastname']) }}">
                             <i class="fas fa-edit"></i> Edit
