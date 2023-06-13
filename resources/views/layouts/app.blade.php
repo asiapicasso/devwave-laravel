@@ -17,8 +17,7 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-    <script src="{{ mix('resources/js/app.js') }}" defer></script>
-    <link href="{{ mix('resources/sass/app.scss') }}" rel="stylesheet">
+
 
 </head>
 @stack('scripts')
