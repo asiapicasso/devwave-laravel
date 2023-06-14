@@ -53,7 +53,6 @@ class ChosenSongController extends Controller
         $voteType = $request->input('vote');
 
         $chosenSong = ChosenSong::where('song_id', $songId)->first();
-
         if ($chosenSong) {
             $nbVotes = $chosenSong->nb_vote;
 

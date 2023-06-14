@@ -6,6 +6,7 @@ use App\Models\Answer;
 use Illuminate\Http\Request;
 use App\Models\Poll;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class PollController extends Controller
 {
@@ -58,7 +59,7 @@ class PollController extends Controller
 
         // Vérifier si l'utilisateur a déjà voté pour le sondage
         $user = Auth::user();
-        dd($user->polls());
+/*         dd($user->polls()); */ 
         if ($user->polls()->where('poll_id', $answer->poll_id)->exists()) {
             // L'utilisateur a déjà voté pour ce sondage
 
