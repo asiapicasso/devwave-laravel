@@ -30,9 +30,8 @@ jobs:
           dangerous-clean-slate: true
 
       - name: Install dependencies
-        run: |
-          composer install --no-dev --prefer-dist --optimize-autoloader
-          npm install
+        run:
+          composer install --no-dev --prefer-dist --optimize-autoloader && npm install
 
       - name: Generate Laravel key
         run: php artisan key:generate
