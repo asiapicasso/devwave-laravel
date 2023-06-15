@@ -1,0 +1,41 @@
+name: Deploy to Infomaniak
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.0'
+
+      - name: Deploy dist dir
+        if: github.event.head_commit.message == 'GOPRO'
+        uses: SamKirkland/FTP-Deploy-Action@4.0.0
+        with:
+          server: ug470.ftp.infomaniak.com # Remplacez par l'adresse de votre serveur FTP
+          username: ${{ secrets.FTP_USERNAME }} # Utilisez les secrets GitHub pour stocker en toute sécurité votre nom d'utilisateur FTP
+          password: ${{ secrets.FTP_PASSWORD }} # Utilisez les secrets GitHub pour stocker en toute sécurité votre mot de passe FTP
+          server-dir: / # Remplacez par le répertoire où vous souhaitez déployer votre site web
+          local-dir: ./dist/ # Déployez uniquement le dossier temporaire contenant le contenu de dist
+          dangerous-clean-slate: true
+
+      - name: Install dependencies
+        run: |
+          composer install --no-dev --prefer-dist --optimize-autoloader
+          npm install
+
+      - name: Generate Laravel key
+        run: php artisan key:generate
+
+      - name: Build assets
+        run: npm run build
