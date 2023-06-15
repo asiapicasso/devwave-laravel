@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Auth;
 */
 Route::resource('poll', PollController::class);
 
-Route::resource('song', SongController::class); // route pour les chansons
+Route::resource('song', SongController::class); 
 
 Route::get('/', function () {
     return view('auth.login');
